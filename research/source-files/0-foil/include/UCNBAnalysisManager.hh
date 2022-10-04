@@ -72,8 +72,10 @@ public: // Without description
   void storePostPhoeE(G4double);
 
 //////////////////////////
-
-
+void p1incident(G4double, G4double,G4double);
+void p2incident(G4double, G4double,G4double);
+void p2out(G4double, G4double,G4double );
+void p1out(G4double, G4double,G4double );
   void recordSilicon1ePosition(G4double, G4double, G4double);
   void recordSilicon2ePosition(G4double, G4double, G4double);
 
@@ -247,8 +249,12 @@ private:
  G4double timeHit2, timeDead1, timeDead2;
   G4double timeHit1P, timeHit2P, timeDead1P, timeDead2P;
 
-  G4double timeHitSi1W[200];
-  G4double timeHitSi2W[200];
+G4double px_in_det1, py_in_det1, pz_in_det1 ; 
+G4double px_in_det2, py_in_det2, pz_in_det2 ; 
+G4double px_out_det2, py_out_det2, pz_out_det2 ;  
+G4double px_out_det1, py_out_det1, pz_out_det1 ;  
+G4double timeHitSi1W[200];
+G4double timeHitSi2W[200];
 
   G4double eEdepTime1[500];
   G4double eEdepTime2[500];

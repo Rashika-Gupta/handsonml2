@@ -196,6 +196,27 @@ void UCNBAnalysisManager::bookROOT()
   Tout->Branch("dESi1HitTimeP", &dESi1HitTimeP,   "dESi1HitTimeP[5]/D");
   Tout->Branch("dESi2HitTimeP", &dESi2HitTimeP,   "dESi2HitTimeP[5]/D");
 
+  /*Momentum inciden and momentum our detector 1 and 2*/
+
+Tout->Branch("px_in_det1", &px_in_det1, "px_in_det1/D");
+Tout->Branch("px_in_det2", &px_in_det2, "px_in_det2/D");
+
+Tout->Branch("py_in_det1", &py_in_det1, "py_in_det1/D");
+Tout->Branch("py_in_det2", &py_in_det2, "py_in_det2/D");
+
+Tout->Branch("pz_in_det1", &pz_in_det1, "pz_in_det1/D");
+Tout->Branch("pz_in_det2", &pz_in_det2, "pz_in_det2/D");
+
+Tout->Branch("px_out_det1", &px_out_det1, "px_out_det1/D");
+Tout->Branch("px_out_det2", &px_out_det2, "px_out_det2/D");
+
+Tout->Branch("py_out_det1", &py_out_det1, "py_out_det1/D");
+Tout->Branch("py_out_det2", &py_out_det2, "py_out_det2/D");
+Tout->Branch("pz_out_det1", &pz_out_det1, "pz_out_det1/D");
+Tout->Branch("pz_out_det2", &pz_out_det2, "pz_out_det2/D");
+
+
+
 }
 ///////////////////////////////////////////////////////////////////////////
 
@@ -238,6 +259,19 @@ void UCNBAnalysisManager::BeginOfEvent()
   HitNo1s=0.;
   HitNo2s=0.; 
   TotalNoHits = 0.;
+  px_in_det1 = 0.;
+  py_in_det1 = 0.;
+  pz_in_det1 = 0.;
+  px_in_det2 = 0;
+  py_in_det2 = 0;
+  pz_in_det2 = 0;
+
+  px_out_det1 = 0.;
+  py_out_det1 = 0.;
+  pz_out_det1 = 0.;
+  px_out_det2 = 0;
+  py_out_det2 = 0;
+  pz_out_det2 = 0;
  // G4cout<<" AM    TotalNoHits "<< TotalNoHits <<G4endl;
   for(Int_t pp=0; pp<5; pp++){
   //  G4cout<<" pp value is :"<<pp<<G4endl;
@@ -371,7 +405,7 @@ void UCNBAnalysisManager::EndOfEvent()
   }
 
 
-
+G4cout<<"at end of run : "<<px_in_det1<< G4endl;
 //------------------Electron time---------------------------------------------------------------
   timeHit1  = globalTimeHit1;
  // G4cout<<"Time hit det 1 AM ln 374   :"<<timeHit1<<G4endl;
@@ -407,6 +441,27 @@ void UCNBAnalysisManager::EndOfEvent()
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void UCNBAnalysisManager::p1incident(G4double px, G4double py, G4double pz)
+{ px_in_det1 = px;
+  py_in_det1 = py; 
+  pz_in_det1 = pz;
+}
+void UCNBAnalysisManager::p2incident(G4double px, G4double py, G4double pz)
+{ px_in_det2 = px;
+  py_in_det2 = py; 
+  pz_in_det2 = pz;
+}
+void UCNBAnalysisManager::p1out(G4double px, G4double py, G4double pz)
+{ px_out_det1 = px;
+  py_out_det1 = py;
+  pz_out_det1 = pz;
+}
+void UCNBAnalysisManager::p2out(G4double px, G4double py, G4double pz)
+{ px_out_det2 = px;
+  py_out_det2 = py;
+  pz_out_det2 = pz;
+}
+
 void UCNBAnalysisManager::AddUpTotalEnergyDeposit(G4double x)
 {
 //  G4cout<<"Add up total energy deposit "<<G4endl;

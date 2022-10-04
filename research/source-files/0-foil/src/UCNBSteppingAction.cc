@@ -75,6 +75,8 @@ void UCNBSteppingAction::UserSteppingAction(const G4Step* fStep)
     }
   }*/
   }
+  
+
   //////////////////////////////////////////////////////////////
 //---------------Electron Position and Time------------------------------------------
   if (fStep->GetPreStepPoint()->GetPhysicalVolume()->GetName() == "Silicon1")
@@ -144,8 +146,44 @@ void UCNBSteppingAction::UserSteppingAction(const G4Step* fStep)
       }
     }
 /*==================== ELECTRON HITS EDEP TIME ================*/     
-
-
+/*finding angle incident*/
+  if(fStep->GetPostStepPoint()->GetPhysicalVolume()->GetName() == "Silicon1" && fStep->GetPreStepPoint()->GetPhysicalVolume()->GetName() == "Dead1"){
+    G4cout<<"Entering detector 1 "<<G4endl;
+    G4ThreeVector pIncidentDet1 = fStep->GetPostStepPoint()->GetMomentumDirection();
+    G4double pInDet1x = pIncidentDet1.x();
+    G4double pInDet1y = pIncidentDet1.y();
+    G4double pInDet1z = pIncidentDet1.z();
+    G4cout <<" pinx : "<<pInDet1x<<G4endl;
+    UCNBAnalysisManager::getInstance()->p1incident(pInDet1x, pInDet1y, pInDet1z);
+  }
+/*finding outoing angle*/
+  if(fStep->GetPreStepPoint()->GetPhysicalVolume()->GetName() == "Silicon1" && fStep->GetPostStepPoint()->GetPhysicalVolume()->GetName() == "Dead1"){
+    G4cout<<"Leaving detector 1 "<<G4endl;
+    G4ThreeVector pOutgoingDet1 = fStep->GetPreStepPoint()->GetMomentumDirection();
+    G4double pOutDet1x = pOutgoingDet1.x();
+    G4double pOutDet1y = pOutgoingDet1.y();
+    G4double pOutDet1z = pOutgoingDet1.z();
+    UCNBAnalysisManager::getInstance()->p1out(pOutDet1x, pOutDet1y, pOutDet1z);
+    }
+  if(fStep->GetPostStepPoint()->GetPhysicalVolume()->GetName() == "Silicon2" && fStep->GetPreStepPoint()->GetPhysicalVolume()->GetName() == "Dead2"){
+    G4cout<<"Entering detector 2 "<<G4endl;
+    G4ThreeVector pIncidentDet2 = fStep->GetPostStepPoint()->GetMomentumDirection();
+    G4double pInDet2x = pIncidentDet2.x();
+    G4double pInDet2y = pIncidentDet2.y();
+    G4double pInDet2z = pIncidentDet2.z();
+    UCNBAnalysisManager::getInstance()->p2incident(pInDet2x, pInDet2y, pInDet2z);
+  
+    }
+/*finding outoing angle*/
+  if(fStep->GetPreStepPoint()->GetPhysicalVolume()->GetName() == "Silicon2" && fStep->GetPostStepPoint()->GetPhysicalVolume()->GetName() == "Dead2"){
+    G4cout<<"Leaving detector 2 "<<G4endl;
+    G4ThreeVector pOutgoingDet2 = fStep->GetPreStepPoint()->GetMomentumDirection();
+    G4double pOutDet2x = pOutgoingDet2.x();
+    G4double pOutDet2y = pOutgoingDet2.y();
+    G4double pOutDet2z = pOutgoingDet2.z();
+    UCNBAnalysisManager::getInstance()->p2out(pOutDet2x, pOutDet2y, pOutDet2z);
+    
+     }  
 //Separating  out the "hits" by comparing the timme of a given hit to the time of the last hit
 
   if (fStep->GetPreStepPoint()->GetPhysicalVolume()->GetName() == "Silicon1" || fStep->GetPreStepPoint()->GetPhysicalVolume()->GetName() == "Silicon2")
@@ -188,11 +226,14 @@ void UCNBSteppingAction::UserSteppingAction(const G4Step* fStep)
         G4double dEstep2 = fStep->GetTotalEnergyDeposit();
        // if(zHitDetector2 > zDeadLayer/m){  
           G4cout<<"2"<<G4endl;
+          /*looking if this is the first step in volume*/
+          
           if (UCNBAnalysisManager::getInstance()->dESi2HitTime[0]==0){
             UCNBAnalysisManager::getInstance()->HitNo2 = 0;
             UCNBAnalysisManager::getInstance()->Det2Hits = UCNBAnalysisManager::getInstance()->HitNo2 + 1;
             UCNBAnalysisManager::getInstance()->dESi2HitTime[0] =fStep->GetPreStepPoint()->GetGlobalTime()/nanosecond;
           }
+          
           else if ((fStep->GetPreStepPoint()->GetGlobalTime()/nanosecond) - (UCNBAnalysisManager::getInstance()->dESi2HitTime[UCNBAnalysisManager::getInstance()->HitNo2]) > 10.){//need to hve anther hit statement because in the next nteraction it is coming to the following else if statement. Hence need to have 
             UCNBAnalysisManager::getInstance()->HitNo2++;
             UCNBAnalysisManager::getInstance()->Det2Hits = UCNBAnalysisManager::getInstance()->HitNo2 + 1;
