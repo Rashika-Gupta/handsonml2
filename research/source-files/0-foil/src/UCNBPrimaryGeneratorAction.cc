@@ -42,12 +42,12 @@ Idea :  if we generate random number between 1 to 34 (28 + 6) the chances that E
   }
   else Ee = EC2;
   
-    G4double THETAE = M_PI*G4UniformRand();
+    G4double cosTHETAE = -1 + 2*G4UniformRand();
     G4double PHIE = 2.*M_PI*G4UniformRand();
 
-  G4double EU = cos(PHIE)*sin(THETAE);
-  G4double EV = sin(PHIE)*sin(THETAE);
-  G4double EW = cos(THETAE);
+  G4double EU = cos(PHIE)*sin(acos(cosTHETAE));
+  G4double EV = sin(PHIE)*sin(acos(cosTHETAE));
+  G4double EW = cosTHETAE;
 
 
   G4double px_hat_e = EU;
