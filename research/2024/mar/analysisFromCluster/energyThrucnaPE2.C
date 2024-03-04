@@ -29,7 +29,7 @@ void energyThrucnaPE2(){
     // file2.open("/mnt/gpfs3_amd/scratch/rgu245/Now/nDecayUCNA+/nDecay+_100Mill_02_oppDirection.txt");		
     //file0.open("/mnt/gpfs3_amd/scratch/rgu245/Now/nDecayUCNA+/DELucnaP_Ethr1_Type0.txt");
   //  fileCheck.open("/mnt/gpfs3_amd/scratch/rgu245/Now/nDecayUCNA+/DELucnaP_Ethr2_check.txt");
-      sprintf(temp, "/mnt/gpfs3_amd/scratch/rgu245/Now/nDecayUCNA+/n_ucnap_Ethr2.root");
+      sprintf(temp, "/mnt/gpfs3_amd/scratch/rgu245/Now/nDecayUCNA+/n_ucnap_Ethr2_5binwidth.root");
     Double_t E_thr = 20;
 
 
@@ -38,28 +38,29 @@ void energyThrucnaPE2(){
     TFile *fout = new TFile(temp,"RECREATE");  //creating output file
     
     TH1D *KE = new TH1D("KE" ,"KE", 8000., 0., 800.); //creating histogrms
-    TH1D *EdepType01 = new TH1D("EdepType01" ,"EdepType01", 8000., 0., 800.); //creating histogrms
-    TH1D *EdepType11 = new TH1D("EdepType11" ,"EdepType11", 8000., 0., 800.);
-    TH1D *EdepType02 = new TH1D("EdepType02" ,"EdepType02", 8000., 0., 800.); //creating histogrms
-    TH1D *EdepType12 = new TH1D("EdepType12" ,"EdepType12", 8000., 0., 800.);
-    TH1D *EdepType0  = new TH1D("EdepType0" ,"EdepType0", 8000., 0., 800.); //creating histogrms
-    TH1D *EdepType1  = new TH1D("EdepType1" ,"EdepType1", 8000., 0., 800.);
-     TH1D *misEdepType01 = new TH1D("misEdepType01" ,"misEdepType01", 8000., 0., 800.); // events emitted in direction opp of dete
-    TH1D *misEdepType11 = new TH1D("misEdepType11" ,"misEdepType11", 8000., 0., 800.);
-    TH1D *misEdepType02 = new TH1D("misEdepType02" ,"misEdepType02", 8000., 0., 800.); //creating histogrms
-    TH1D *misEdepType12 = new TH1D("misEdepType12" ,"misEdepType12", 8000., 0., 800.);
+    TH1D *EdepType01 = new TH1D("EdepType01" ,"EdepType01", 160., 0., 800.); //creating histogrms
+    TH1D *EdepType11 = new TH1D("EdepType11" ,"EdepType11", 160., 0., 800.);
+    TH1D *EdepType02 = new TH1D("EdepType02" ,"EdepType02", 160., 0., 800.); //creating histogrms
+    TH1D *EdepType12 = new TH1D("EdepType12" ,"EdepType12", 160., 0., 800.);
+    TH1D *EdepType0  = new TH1D("EdepType0" ,"EdepType0", 160., 0., 800.); //creating histogrms
+    TH1D *EdepType1  = new TH1D("EdepType1" ,"EdepType1", 160., 0., 800.);
+    TH1D *misEdepType01 = new TH1D("misEdepType01" ,"misEdepType01", 160., 0., 800.); // events emitted in direction opp of dete
+    TH1D *misEdepType11 = new TH1D("misEdepType11" ,"misEdepType11", 160., 0., 800.);
+    TH1D *misEdepType02 = new TH1D("misEdepType02" ,"misEdepType02", 160., 0., 800.); //creating histogrms
+    TH1D *misEdepType12 = new TH1D("misEdepType12" ,"misEdepType12", 160., 0., 800.);
  
+
     TH1D *pz11 = new TH1D("pz11","pz11", 200, -1.0, 1.0);
     TH1D *pz12 = new TH1D("pz12","pz12", 200, -1.0, 1.0);
     TH1D *pz01 = new TH1D("pz01","pz01", 200, -1.0, 1.0);
     TH1D *pz02 = new TH1D("pz02","pz02", 200, -1.0, 1.0);
   
-    TH1D *EdepType01Thr0 = new TH1D("EdepType01Thr0" ,"EdepType01Thr0", 8000., 0., 800.); //creating histogrms
-    TH1D *EdepType11Thr0 = new TH1D("EdepType11Thr0" ,"EdepType11Thr0", 8000., 0., 800.);
-    TH1D *EdepType02Thr0 = new TH1D("EdepType02Thr0" ,"EdepType02Thr0", 8000., 0., 800.); //creating histogrms
-    TH1D *EdepType12Thr0 = new TH1D("EdepType12Thr0" ,"EdepType12Thr0", 8000., 0., 800.);
-    TH1D *EdepType0Thr0  = new TH1D("EdepType0Thr0" ,"EdepType0Thr0", 8000., 0., 800.); //creating histogrms
-    TH1D *EdepType1Thr0  = new TH1D("EdepType1Thr0" ,"EdepType1Thr0", 8000., 0., 800.);
+    TH1D *EdepType01Thr0 = new TH1D("EdepType01Thr0" ,"EdepType01Thr0", 160., 0., 800.); //creating histogrms
+    TH1D *EdepType11Thr0 = new TH1D("EdepType11Thr0" ,"EdepType11Thr0", 160., 0., 800.);
+    TH1D *EdepType02Thr0 = new TH1D("EdepType02Thr0" ,"EdepType02Thr0", 160., 0., 800.); //creating histogrms
+    TH1D *EdepType12Thr0 = new TH1D("EdepType12Thr0" ,"EdepType12Thr0", 160., 0., 800.);
+    TH1D *EdepType0Thr0  = new TH1D("EdepType0Thr0" ,"EdepType0Thr0", 160., 0., 800.); //creating histogrms
+    TH1D *EdepType1Thr0  = new TH1D("EdepType1Thr0" ,"EdepType1Thr0", 160., 0., 800.);
 //saving the evnets that wouold also be emiited in opposite direction. 
     Int_t TotalNoHits;
     Double_t counter = 0;
